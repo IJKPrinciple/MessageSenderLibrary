@@ -12,12 +12,12 @@ namespace LibTesting
             tc.authToken = ""; // edit
             tc.from = "+10000000000"; // edit
 
-            TwilioSender ts = TwilioSender.GetInstance();
+            var ts = TwilioSender.GetInstance();
             //TwilioSender ts2 = default;
             //ISender<TwilioCredentials, MessageResource> is = TwilioSender.GetInstance();
             ts.ModifyCredentials(tc);
 
-            TwilioCredentials tc2 = ts.GetCredentials();
+            var tc2 = ts.GetCredentials();
 
             //var message = ts.SendMessage("+420776000000", "this is a message for you, M.");
             var message = ts.SendMessage("+420723000000", "yet another message for you, I."); // edit
