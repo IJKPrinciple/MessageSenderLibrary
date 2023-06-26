@@ -14,12 +14,7 @@ namespace MessageSenderLib.Twilio
     {
         public string accountSid;
         public string authToken;
-        public string From
-        {
-            get => _from.ToString();
-            set => _from = new PhoneNumber(value);
-        }
-        private PhoneNumber _from;
+        public string from;
     }
     public class TwilioSender : ISender<TwilioCredentials, MessageResource>
     {
@@ -36,7 +31,7 @@ namespace MessageSenderLib.Twilio
         {
             _creds.accountSid = creds.accountSid;
             _creds.authToken = creds.authToken;
-            _creds.From = creds.From;
+            _creds.from = creds.from;
             TwilioClient.Init(_creds.accountSid, _creds.authToken);
         }
 
@@ -53,12 +48,13 @@ namespace MessageSenderLib.Twilio
         {
             var messageOptions = new CreateMessageOptions(
               new PhoneNumber(to));
-            messageOptions.From = new PhoneNumber(_creds.From);
+            messageOptions.From = new PhoneNumber(_creds.from);
             messageOptions.Body = message;
-
 
             var retMessage = MessageResource.Create(messageOptions);
             return retMessage;
         }
+
+        public TwilioCredentials GetCredentials() => _creds;
     }
 }
