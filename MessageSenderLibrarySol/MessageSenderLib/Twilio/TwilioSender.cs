@@ -19,6 +19,11 @@ namespace MessageSenderLib.Twilio
     public class TwilioSender : ISender<TwilioCredentials, MessageResource>
     {
         private static TwilioSender? _instance;
+        /* idea: sid and auth token should be a static member of the class, from should be an instance member
+        and thus the singleton pattern won't be used - we can have several instances with different from numbers
+        another idea: make to number also an instance member, so that sending messages requires only the method call
+        with the message body
+        */
         private TwilioCredentials _creds;
 
         private TwilioSender() { }
